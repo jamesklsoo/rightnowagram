@@ -4,8 +4,12 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :username
       t.string :name
       t.string :email
-      t.string :password_digest
+      t.string :encrypted_password
       t.timestamps
     end
+
+    add_index :users, :email
+    add_index :users, :username
+    add_index :users, :name
   end
 end
