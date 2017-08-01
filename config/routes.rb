@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     resources :comments, :likes
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get '/login' => 'sessions#new', as: 'login'
-  post '/login' => 'sessions#create'
+  get '/signin' => 'sessions#new', as: 'signin'
+  post '/signin' => 'sessions#create'
   get '/logout' => 'sessions#destroy', as: 'logout'
 
   root 'welcome#index'

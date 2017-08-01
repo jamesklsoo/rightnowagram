@@ -40,6 +40,9 @@ gem 'omniauth-facebook'
 # Faker
 gem 'faker'
 
+# For searching
+gem 'filterrific'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

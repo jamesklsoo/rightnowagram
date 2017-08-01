@@ -26,30 +26,29 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = Post.new(create_params)
+    @post.user_id = current_user.id
+    @post.time = Time.now
+    if @post.save
+      flash[:success] = "User has been created."
+      redirect_to post_path(@post)
+    else
+      flash.now[:danger] = "There's seem to be an error."
+      render :new
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
     end
   end
 
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    @post.update(update_params)
+    if @post.save
+      flash[:success] = "Updated."
+      redirect_to @post
+    else
+      flash.now[:danger] = "Update fail."
+      render :edit
     end
   end
 
@@ -64,13 +63,16 @@ class PostsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_post
-    @post = Post.find(params[:id])
+  def create_params
+    params.require(:post).permit(:caption, {images: []})
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def post_params
-    params.fetch(:post, {})
+  def update_params
+    params.require(:post).permit(:caption)
+  end
+
+
+  def find_post
+    @post = Post.find(params[:id])
   end
 end

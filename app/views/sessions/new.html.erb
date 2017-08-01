@@ -1,0 +1,10 @@
+<div class = "text-center">
+  <h1>Sign In</h1>
+</div>
+<div class = "text-center well ">
+  <%= form_tag '/signin' do %>
+    Email: <%= text_field_tag :email %>
+    Password: <%= password_field_tag :password %>
+    <%= submit_tag "Submit" %>
+  <% end %>
+</div>
