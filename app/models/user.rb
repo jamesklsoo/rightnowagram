@@ -1,8 +1,5 @@
 class User < ApplicationRecord
-  require 'bcrypt'
   has_many :authentications, :dependent => :destroy
-
-  has_secure_password
 
   validates_presence_of :fullname
   validates_presence_of :email
@@ -10,30 +7,18 @@ class User < ApplicationRecord
   validate :valid_email
   before_create :valid_email
 
-  has_many :posts, dependent: :destroy
+  has_many :posts
   has_many :comments
-  has_many :likes
 
-  enum gender: [:not_specified, :male, :female]
+  mount_uploader :avatar, AvatarUploader
 
-  # def valid_password
-  #   unless self.password.length >= 6
-  #     errors.add(:password, "length is too short.")
-  #   end
-  # end
+  def self.create_with_auth_and_hash(authentication, auth_hash) create! do |u|
+      u.first_name = auth_hash["info"]["first_name"]
+      u.last_name = auth_hash["info"]["last_name"]
+      u.email = auth_hash["info"]["email"]
 
-  def valid_email
-    unless self.email =~ /\w+@\w+\.\w{2,}/
-      errors.add(:email, "is not valid.")
-    end
-  end
-
-  def self.create_with_auth_and_hash(authentication, auth_hash)
-    create! do |user|
-      user.fullname = auth_hash["extra"]["raw_info"]["name"]
-      user.email = auth_hash["extra"]["raw_info"]["email"]
-      user.authentications << (authentication)
-      user.password = SecureRandom.hex(7)
+      u.password = SecureRandom.hex(6)
+      u.authentications<<(authentication)
     end
   end
 
@@ -78,7 +63,7 @@ class User < ApplicationRecord
   end
 
   def name
-    fullname
+    last_name + " " + first_name
   end
 
   scope :search_query, -> (search) { where("LOWER(fullname) LIKE ?", "%#{search.downcase}%") }
