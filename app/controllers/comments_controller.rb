@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
   def sign_in?
     if current_user.nil?
       flash[:danger] = 'Please sign in.'
-      redirect_to '/login'
+      redirect_to '/signin'
     end
   end
 end

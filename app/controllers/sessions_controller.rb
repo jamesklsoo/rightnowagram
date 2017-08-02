@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     def destroy
       reset_session
       flash[:danger] = "Signed out."
-      redirect_to login_path
+      redirect_to signin_path
     end
 
     def create_from_omniauth
