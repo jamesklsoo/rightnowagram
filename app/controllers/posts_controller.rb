@@ -12,6 +12,8 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   # GET /posts/new
@@ -26,16 +28,13 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(create_params)
-    @post.user_id = current_user.id
-    @post.time = Time.now
-    if @post.save
-      flash[:success] = "User has been created."
-      redirect_to post_path(@post)
+    post = current_user.posts.new(post_params)
+    if post.save
+      flash[:success] = "You have successfully created a post!"
+      redirect_to root_path
     else
-      flash.now[:danger] = "There's seem to be an error."
-      render :new
-
+      flash[:error] = "There was an error creating your post!"
+      redirect_to new_post_path
     end
   end
 
@@ -63,16 +62,8 @@ class PostsController < ApplicationController
   end
 
   private
-  def create_params
-    params.require(:post).permit(:caption, {images: []})
-  end
 
-  def update_params
-    params.require(:post).permit(:caption)
-  end
-
-
-  def find_post
-    @post = Post.find(params[:id])
+  def post_params
+    params.require(:post).permit(:title, :story)
   end
 end

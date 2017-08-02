@@ -1,27 +1,18 @@
 class CommentsController < ApplicationController
-  before_action :sign_in?
-  def new
-  end
-
   def create
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.new(comment_params)
-    @comment.user_id = current_user.id
-    if @comment.save
-      redirect_to root_path
+    comment = current_user.comments.new(comment_params)
+    comment.post_id = params[:post][:id]
+    if comment.save
+      flash[:success] = "Comment created!"
+    else
+      flash[:error] = "There was an error creating your comment!"
     end
+    redirect_back(fallback_location: root_path)
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:comments)
-  end
-
-  def sign_in?
-    if current_user.nil?
-      flash[:danger] = 'Please sign in.'
-      redirect_to '/signin'
-    end
+    params.require(:comment).permit(:content)
   end
 end

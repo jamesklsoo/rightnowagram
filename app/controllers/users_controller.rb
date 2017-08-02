@@ -4,8 +4,6 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-
     @filterrific = initialize_filterrific(User, params[:filterrific],
                                           select_options: {
                                             sorted_by: User.options_for_sorted_by
@@ -23,7 +21,13 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user_post = @user.posts.order("created_at DESC")
+    if !(logged_in?)
+      redirect_to new_user_path
+    elsif params[:id]
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
   end
 
   # GET /users/new
@@ -33,31 +37,30 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user = User.find(current_user)
   end
 
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-    if @user.save
-      flash[:success] = "User has been created"
-      redirect_to root_path
+    user = User.new(user_params)
+    if user.save
+      flash[:success] = "Congratulations! You have successfully created an account!"
     else
-      flash.now[:danger] = "Invalid input"
-      render :new
+      flash[:error] = "There is an error with creating your account!"
     end
+    redirect_to new_session_path
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    @user.update(update_params)
-    if @user.save(validate: false)
-      flash[:success] = "Profile updated"
-      redirect_to @user
+    if current_user.update(user_params)
+      flash[:message] = "Successfully updated your account!"
+      redirect_to "/"
     else
-      flash.now[:danger] = "Update failed"
-      render :edit
+      flash[:error] = current_user.errors.messages
+      redirect_to edit_user_path(current_user)
     end
   end
 
@@ -72,16 +75,8 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
-    params.require(:user).permit(:email, :fullname, :username, :password)
-  end
-
-  def update_params
-    #need to add website and other instagrams options in table
-    params.require(:user).permit(:email, :fullname, :username, :password, :website, :bio, :gender, :phone_num, :avatar)
-  end
-
-  def find_user
-    @user = User.find(params[:id])
+    params.require(:user).permit(:money, :last_name, :first_name, :email, :password, :avatar)
   end
 end
