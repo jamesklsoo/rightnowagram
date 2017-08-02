@@ -1,25 +1,43 @@
 <p id="notice"><%= notice %></p>
-
 <h1>Users</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<div class = "col-sm-4"></div>
+<div class = "col-sm-4">
+  <% if current_user.nil? %>
+    <%= form_for @user do |form|%>
+      <%= render partial: 'users/form', object: form %>
+    <%end%>
+  <%else%>
+    <form class="form-inline">
+      <%= form_for_filterrific @filterrific do |f| %>
+        <div>
+          <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+          <%= f.text_field(:search_query, class: 'filterrific-periodically-observed form-control mb-2 mr-sm-2 mb-sm-0', placeholder: 'Search'
+    ) %>
+        </div>
+        <div>
+          <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by], class: 'form-control mb-2 mr-sm-2 mb-sm-0') %>
+        </div>
+        <div>
+          <%= link_to(
+      'Reset filters',
+      reset_filterrific_url, class: 'form-control mb-2 mr-sm-2 mb-sm-0'
+    ) %>
+        </div>
+        <%# add an automated spinner to your form when the list is refreshed %>
+        <%= render_filterrific_spinner %>
+      <% end %>
+    </form>
+    <br>
+    <div class="row">
+      <div id="filterrific_results">
+        <%= render(partial: 'users/list', locals: { users: @users }) %>
+      </div>
+    </div>
+  </div>
+<%end%>
+<div class = "col-sm-4"></div>
+<%= link_to 'Show', user %>
+<%= link_to 'Edit', edit_user_path(user) %>
+<%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
 <br>
-
 <%= link_to 'New User', new_user_path %>
