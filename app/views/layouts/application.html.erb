@@ -11,38 +11,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <div class="container-fluid">
-      <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <h2>Rightnowagram</h2>
-              <li>
-                <li class="nav-item">
-                  <%= link_to "Home", users_path, class: "nav-link" %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "My Profile", class: "nav-link" %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "Make Payment", braintree_new_path, class: "nav-link" %>
-                </li>
-                <li class="nav-item ">
-                  <%= link_to "Make a New Post", new_post_path, class: "nav-link" %>
-                </li>
-                <li class="nav-item navbar-toggler-right">
-                  <%= button_to ("Sign Out"), sign_out_path, method: :delete, class: "nav-link btn btn-secondary" %>
-                </li>
-              </li>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <br>
-      <% flash.each do |key, value| -%>
-        <div id="flash_<%= key %>"><%=h value %></div>
-      <% end %>
-      <br>
+    <div class="container">
       <%= yield %>
     </div>
   </body>
