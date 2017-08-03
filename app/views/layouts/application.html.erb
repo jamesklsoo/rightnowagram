@@ -18,24 +18,22 @@
             <li class="nav-item">
               <h2>Rightnowagram</h2>
               <li>
-                <% if logged_in? %>
-                  <li class="nav-item">
-                    <%= link_to "Home", users_path, class: "nav-link" %>
-                  </li>
-                  <li class="nav-item">
-                    <%= link_to "My Profile", user_path(current_user), class: "nav-link" %>
-                  </li>
-                  <li class="nav-item">
-                    <%= link_to "Make Payment", braintree_new_path, class: "nav-link" %>
-                  </li>
-                  <li class="nav-item ">
-                    <%= link_to "Make a New Post", new_post_path, class: "nav-link" %>
-                  </li>
-                  <li class="nav-item navbar-toggler-right">
-                    <%= button_to ("Sign Out"), sign_out_path, method: :delete, class: "nav-link btn btn-secondary" %>
-                  </li>
+                <li class="nav-item">
+                  <%= link_to "Home", users_path, class: "nav-link" %>
                 </li>
-              <% end %>
+                <li class="nav-item">
+                  <%= link_to "My Profile", class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Make Payment", braintree_new_path, class: "nav-link" %>
+                </li>
+                <li class="nav-item ">
+                  <%= link_to "Make a New Post", new_post_path, class: "nav-link" %>
+                </li>
+                <li class="nav-item navbar-toggler-right">
+                  <%= button_to ("Sign Out"), sign_out_path, method: :delete, class: "nav-link btn btn-secondary" %>
+                </li>
+              </li>
             </li>
           </ul>
         </div>
