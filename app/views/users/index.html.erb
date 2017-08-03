@@ -1,12 +1,17 @@
 <p id="notice"><%= notice %></p>
 <h1>Users</h1>
-<div class = "col-sm-4"></div>
-<div class = "col-sm-4">
-  <% if current_user.nil? %>
-    <%= form_for @user do |form|%>
-      <%= render partial: 'users/form', object: form %>
-    <%end%>
-  <%else%>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-1">
+    <h2> Users </h2>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-6">
     <form class="form-inline">
       <%= form_for_filterrific @filterrific do |f| %>
         <div>
@@ -27,15 +32,16 @@
         <%= render_filterrific_spinner %>
       <% end %>
     </form>
-    <br>
-    <div class="row">
-      <div id="filterrific_results">
-        <%= render(partial: 'users/list', locals: { users: @users }) %>
-      </div>
-    </div>
   </div>
-<%end%>
-<div class = "col-sm-4"></div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-2">
+    <%= render(partial: 'users/list', locals: { users: @users }) %>
+  </div>
+</div>
 <%= link_to 'Show', user %>
 <%= link_to 'Edit', edit_user_path(user) %>
 <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>

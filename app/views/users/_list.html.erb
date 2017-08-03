@@ -1,5 +1,5 @@
 <div id="filterrific_results">
   <% @users.each do |user| %>
-    <p><%= link_to (user.fullname), user_path(user) %></p>
+    <p><%= link_to (user.last_name + " "  + user.first_name), user_path(user) %></p>
   <% end %>
 </div>
