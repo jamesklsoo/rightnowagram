@@ -1,7 +1,6 @@
-// Place all the styles related to the Braintree controller here.
+// Place all the styles related to the Payment controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 .hosted-field {
   height: 50px;
   box-sizing: border-box;
@@ -35,7 +34,7 @@
   text-align: center;
 }
 
-.button {
+#submit-payment-btn {
   cursor: pointer;
   font-weight: 500;
   line-height: inherit;
@@ -50,12 +49,12 @@
   display: inline-block;
 }
 
-.button--small {
+#submit-payment-btn--small {
   padding: 10px 20px;
   font-size: 0.875rem;
 }
 
-.button--green {
+#submit-payment-btn--green {
   outline: none;
   background-color: #64d18a;
   border-color: #64d18a;
@@ -63,7 +62,7 @@
   transition: all 200ms ease;
 }
 
-.button--green:hover {
+#submit-payment-btn--green:hover {
   background-color: #8bdda8;
   color: white;
 }

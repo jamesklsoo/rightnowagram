@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
-  resources :users
-  resources :posts do
-    resources :comments, :likes
+  get 'braintree/new'
+
+  post 'braintree/checkout'
+
+  resources :users do
+    resources :posts, except: [:index, :new, :create]
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get 'signup' => 'users#new'
-  get '/signin' => 'sessions#new', as: 'signin'
-  post '/signin' => 'sessions#create'
-  get '/logout' => 'sessions#destroy', as: 'logout'
-  get "/auth/:provider/callback" => "sessions#create_from_omniauth"
+
+  resources :posts, only: [:index, :new, :create]
+
+  resource :session, only: [:create, :destroy, :new]
+
+  resources :comments, only: [:create, :destroy, :update]
+
+  get '/auth/:provider/callback', to: 'sessions#create_from_omniauth'
+
+  delete "/sign_out" => "sessions#destroy", as: "sign_out"
   root 'welcome#index'
 end

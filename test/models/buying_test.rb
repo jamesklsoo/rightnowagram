@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BraintreeControllerTest < ActionDispatch::IntegrationTest
+class BuyingTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

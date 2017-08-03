@@ -1,17 +1,33 @@
-$(document).ready(function() {
+<div class="demo-frame">
+  <%= form_for :checkout_form, url: payment_checkout_path(@post),html: { id: "cardForm"} do |form| %>
+    <%= form.label :card_number, "Credit Card Number", html: {class: "hosted-fields--label"} %>
+    <div id="card-number" class="hosted-field"></div>
+    <%= form.label :expiration_date, "Expiration Date", html: {class: "hosted-fields--label"} %>
+    <div id="expiration-date" class="hosted-field"></div>
+    <%= form.label :cvv, "CVV", html: {class: "hosted-fields--label"} %>
+    <div id="cvv" class="hosted-field"></div>
+    <%= form.hidden_field "payment_method_nonce" %>
+    <div class="button-container">
+      <%= form.submit "Purchase", disabled: true, class: "btn btn-primary", id: "submit-payment-btn" %>
+    </div>
+  <% end %>
+</div>
+<!-- Load the Client component. -->
+<script src="https://js.braintreegateway.com/web/3.6.3/js/client.min.js"></script>
+<!-- Load the Hosted Fields component. -->
+<script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.min.js"></script>
+<script>
+  var authorization = '<%= @client_token %>'
   var form = document.querySelector('#cardForm');
   var submit = document.querySelector("#submit-payment-btn");
-  var authorization = $('input[name="token"]').attr('value');
-
   braintree.client.create({
     // Replace this with your own authorization.
-    authorization: authorization
+    authorization: '<%= @client_token %>'
   }, function (clientErr, clientInstance) {
     if (clientErr) {
       // Handle error in client creation
       return;
     }
-
     braintree.hostedFields.create({
       client: clientInstance,
       styles: {
@@ -44,18 +60,14 @@ $(document).ready(function() {
         // Handle error in Hosted Fields creation
         return;
       }
-
       submit.removeAttribute('disabled');
-
       form.addEventListener('submit', function (event) {
         event.preventDefault();
-
         hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
           if (tokenizeErr) {
             // Handle error in Hosted Fields tokenization
             return;
           }
-
           // Put `payload.nonce` into the `payment_method_nonce` input, and then
           // submit the form. Alternatively, you could send the nonce to your server
           // with AJAX.
@@ -65,4 +77,4 @@ $(document).ready(function() {
       }, false);
     });
   });
-});
+</script>
