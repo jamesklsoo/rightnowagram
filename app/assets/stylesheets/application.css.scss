@@ -16,4 +16,6 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "/"; 
+@import "payment";
+@import "posts";
+@import "users";
