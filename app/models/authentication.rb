@@ -6,7 +6,8 @@ class Authentication < ApplicationRecord
   end
 
   def update_token(auth_hash)
-    self.token = auth_hash["credentials"]["token"]
-    self.save
+    self.update(token: auth_hash["credentials"]["token"])
+    # self.token = auth_hash["credentials"]["token"]
+    # self.save
   end
 end
