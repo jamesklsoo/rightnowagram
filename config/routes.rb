@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
 
-  resources :users
-  resources :posts do
-    resources :comments, :likes, :buyings
+  resources :users, controller: "users" do
+    resources :likes, controller: "likes"
+    resources :posts, controller: "posts"
+    resources :comments, controller: "comments"
+  end
+
+  resources :posts, controller: "posts" do
+    resources :comments, controller: "comments", only: [:create, :new, :update, :destroy]
+    resources :likes, controller: "likes"
+    resources :buyings, controller: "buyings"
   end
 
   get '/login' => 'sessions#new', as: 'login'

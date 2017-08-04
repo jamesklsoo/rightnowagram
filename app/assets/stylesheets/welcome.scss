@@ -1,3 +1,13 @@
 // Place all the styles related to the Welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.welcome-page {
+  background-image: url(http://thetravelhack.com/wp-content/uploads/2014/12/That-time-I-spoke-at-Google-and-why-brands-should-work-with-travel-bloggers.jpeg);
+  padding-bottom: 300px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.header {
+  text-align: center;
+}

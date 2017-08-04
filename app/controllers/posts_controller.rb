@@ -13,7 +13,6 @@ class PostsController < ApplicationController
   end
 
   def create
-
     @post = Post.new(create_params)
     @post.user_id = current_user.id
     @post.time = Time.now
@@ -52,7 +51,7 @@ class PostsController < ApplicationController
   private
 
   def create_params
-    params.require(:post).permit(:caption, {images: []}, :price)
+    params.require(:post).permit(:caption, :price, {images: []})
   end
 
   def update_params

@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       # logged in when they navigate around our website.
       session[:user] = @user.id
       flash[:success] = "Signed in!"
-      redirect_to root_path
+      redirect_to user_posts_path(user_id: @user.id)
     else
       # If user's login doesn't work, send them back to the login form.
       render :new

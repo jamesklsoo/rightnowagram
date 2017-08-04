@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20170803023734) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string "comments"
+    t.string "contents"
     t.integer "user_id"
     t.integer "post_id"
     t.datetime "created_at", null: false
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20170803023734) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "avatar"
+    t.json "avatar"
     t.string "website"
     t.string "bio"
     t.integer "gender"
