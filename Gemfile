@@ -37,6 +37,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+# Key security
+gem "figaro"
+
 # Faker
 gem 'faker'
 
@@ -50,6 +53,9 @@ gem 'braintree'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 
+#for aws
+gem 'fog', require: 'fog/aws'
+
 # Time in words
 gem 'time_ago_in_words'
 
@@ -62,6 +68,10 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
+  gem 'guard-rspec', require: false
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do

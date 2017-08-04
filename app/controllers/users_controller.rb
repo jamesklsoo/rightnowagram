@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  bbefore_action :find_user, only: [:show, :edit, :update]
+  before_action :find_user, only: [:show, :edit, :update]
 
   def index
     @user = User.new

@@ -1,20 +1,22 @@
 Rails.application.routes.draw do
-  get 'braintree/new'
 
-  post 'braintree/checkout'
-
-  resources :users do
-    resources :posts, except: [:index, :new, :create]
+  resources :users, controller: "users" do
+    resources :likes, controller: "likes"
+    resources :posts, controller: "posts"
+    resources :comments, controller: "comments"
   end
 
-  resources :posts, only: [:index, :new, :create]
+  resources :posts, controller: "posts" do
+    resources :comments, controller: "comments", only: [:create, :new, :update, :destroy]
+    resources :likes, controller: "likes"
+    resources :buyings, controller: "buyings"
+  end
 
-  resource :session, only: [:create, :destroy, :new]
-
-  resources :comments, only: [:create, :destroy, :update]
-
-  get '/auth/:provider/callback', to: 'sessions#create_from_omniauth'
-
-  delete "/sign_out" => "sessions#destroy", as: "sign_out"
+  get '/login' => 'sessions#new', as: 'login'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy', as: 'logout'
+  get "/auth/:provider/callback" => "sessions#create_from_omniauth"
+  get "/posts/:id/payment/new" => "payment#new", as: "payment_new"
+  post '/posts/:id/payment/checkout' => "payment#checkout", as: "payment_checkout"
   root 'welcome#index'
 end
