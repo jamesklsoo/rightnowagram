@@ -45,7 +45,7 @@
     </div>
     <div class= "text-center ">
       <% @user_post.each do |post|%>
-        <%= link_to image_tag (post.images[0].display.url if post.images[0])%><br>
+        <%= link_to image_tag(post.images[0].display.url if post.images[0])%><br>
         <hr>
       <%end%>
     </div>
