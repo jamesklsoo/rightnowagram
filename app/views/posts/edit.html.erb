@@ -44,6 +44,5 @@
   <%= post.text_field :caption %>
   <%= post.submit "Submit"%>
 <%end%>
-<%= link_to 'Show', @post %> |
-<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back', user_posts_path(current_user), :method => :get, :class => "btn btn-success" %>
+<%= link_to 'Delete', post_path(@post.id), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', post_path(@post.id) %>

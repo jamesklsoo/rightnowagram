@@ -12,6 +12,11 @@ Rails.application.routes.draw do
     resources :buyings, controller: "buyings"
   end
 
+  resources :users
+  resources :posts do
+    resources :comments, :likes, :buyings
+  end
+
   get '/login' => 'sessions#new', as: 'login'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy', as: 'logout'

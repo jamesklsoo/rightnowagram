@@ -19,9 +19,9 @@ class PaymentController < ApplicationController
     )
 
     if result.success?
-      redirect_to :root, :flash => { :success => "Transaction successful!" }
+      redirect_to :posts, :flash => { :success => "Transaction successful!" }
     else
-      redirect_to :root, :flash => { :danger => "Transaction failed. Please try again." }
+      redirect_to :posts, :flash => { :danger => "Transaction failed. Please try again." }
     end
   end
 end
