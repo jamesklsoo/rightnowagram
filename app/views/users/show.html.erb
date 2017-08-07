@@ -42,14 +42,16 @@
     <p>
       <%=@user.bio unless @user.bio.blank?%><br>
       <%=@user.website unless @user.website.blank?%><br>
-    </div>
-    <div class= "text-center ">
-      <% @user_post.each do |post|%>
-        <%= link_to image_tag (post.images[0].display.url if post.images[0])%><br>
-        <hr>
-      <%end%>
-    </div>
-    <div class = "col-sm-2">
-      <%= button_to 'Edit', edit_user_path(@user), :method => :get, :class => "btn btn default" %>
-      <%= button_to 'Back', user_posts_path(current_user), :method => :get, :class => "btn btn default" %>
-    </div>
+    </p>
+  </div>
+  <div class= "text-center ">
+    <% @user_post.each do |post|%>
+      <%= link_to image_tag (post.images[0].display.url if post.images[0])%><br>
+      <hr>
+    <%end%>
+  </div>
+  <div class = "col-sm-2">
+    <%= button_to 'Edit', edit_user_path(@user), :method => :get, :class => "btn btn default" %>
+    <%= button_to 'Back', user_posts_path(current_user), :method => :get, :class => "btn btn default" %>
+  </div>
+</div>
