@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
   context "validations" do
     it "should have comment" do
-      should have_db_column(:comments).of_type(:string)
+      should have_db_column(:contents).of_type(:string)
     end
 
-    describe "validates presence of attributes" do
-      it { is_expected.to validate_presence_of(:comments) }
+    describe "does not validates presence of attributes" do
+      it { should_not validate_presence_of(:contents) }
     end
   end
 

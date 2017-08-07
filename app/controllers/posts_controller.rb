@@ -52,6 +52,7 @@ class PostsController < ApplicationController
     end
   end
 
+
   private
 
   def create_params

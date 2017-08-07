@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
       should have_db_column(:bio).of_type(:string)
       should have_db_column(:gender).of_type(:integer)
       should have_db_column(:phone_num).of_type(:integer)
-      should have_db_column(:avatar).of_type(:string)
+      should have_db_column(:avatar).of_type(:json)
     end
 
     describe "validates presence of attributes" do

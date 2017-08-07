@@ -9,26 +9,17 @@
         <span class="icon-bar"></span>
       </button>
       <div class="navbar-brand"><%= link_to "Rightnowagram", posts_path%></div>
-      <form class="navbar-form navbar-left">
-        <%= form_tag(posts_path, :method => 'get', id: "search-form", :class => "navbar-form navbar-left") do %>
-          <div class="form-group">
-            <%= text_field_tag :search, params[:search], :class => "form-control", placeholder: "Search posts or users" %>
-          </div>
-          <%= submit_tag "Search", :name => nil, :class => "btn btn-default" %>
-        <% end %>
-      </form>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log Out", logout_path%></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.fullname %><b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><%= image_tag current_user.avatar.profile%></li>
             <li><%= link_to "Profile", user_path(current_user.id) %></li>
-            <li><%= link_to "Edit Profile", edit_user_path(current_user.id)%></li>
             <li><%= link_to "Search for Users", users_path%></li>
+            <li><%= link_to "Log Out", logout_path%></li>
           </ul>
         </li>
       </ul>
@@ -40,6 +31,14 @@
 </nav>
 </div>
 <p id="notice"><%= notice %></p>
+<div class="wrapper">
+  <% flash.each do |key, value| -%>
+    <div class="alert alert-<%=key%> alert-dismissable">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <%=h value %>
+    </div>
+  <% end %>
+</div>
 <h1>Posts</h1>
 <div class = "col-sm-2"></div>
 <div class = "col-sm-8 well">

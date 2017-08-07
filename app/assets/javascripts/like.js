@@ -3,7 +3,7 @@ $(document).on('turbolinks:load', function() {
     event.preventDefault();
     var likeCount = $(this).siblings('.likes_count');
 
-    $.post(this.href, function(response) {
+    $.post(this.href, function(response) { 
       likeCount.text(response.new_like_count);
 
       
@@ -12,7 +12,3 @@ $(document).on('turbolinks:load', function() {
   });
 
 });
-
-
-// $(document).on('turbolinks:load', function - the fix for js not working after going to new page
-// $(document).ready(function

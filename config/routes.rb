@@ -12,16 +12,11 @@ Rails.application.routes.draw do
     resources :buyings, controller: "buyings"
   end
 
-  resources :users
-  resources :posts do
-    resources :comments, :likes, :buyings
-  end
-
   get '/login' => 'sessions#new', as: 'login'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy', as: 'logout'
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
-  get "/posts/:id/payment/new" => "payment#new", as: "payment_new"
-  post '/posts/:id/payment/checkout' => "payment#checkout", as: "payment_checkout"
+  get "/posts/payment/new" => "payment#new", as: "payment_new"
+  post '/posts/payment/checkout' => "payment#checkout", as: "payment_checkout"
   root 'welcome#index'
 end

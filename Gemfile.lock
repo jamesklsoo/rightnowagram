@@ -462,6 +462,7 @@ DEPENDENCIES
   pg
   puma (~> 3.7)
   rails (~> 5.1.2)
+  rb-fsevent
   record_tag_helper (~> 1.0)
   rspec-given
   rspec-rails (~> 3.5)

@@ -75,6 +75,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard-rspec'
   gem 'rspec-given'
+  gem 'rb-fsevent'
   gem 'shoulda-matchers', '~> 3.1'
 end
 
