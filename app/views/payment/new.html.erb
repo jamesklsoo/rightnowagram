@@ -9,6 +9,7 @@
     <%= form.hidden_field "payment_method_nonce" %>
     <div class="button-container">
       <%= form.submit "Purchase", disabled: true, class: "btn btn-primary", id: "submit-payment-btn" %>
+      <%= link_to "Cancel", posts_path, class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>

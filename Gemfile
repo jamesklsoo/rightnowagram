@@ -59,6 +59,9 @@ gem 'fog', require: 'fog/aws'
 # Time in words
 gem 'time_ago_in_words'
 
+# Record Tag Helper
+gem 'record_tag_helper', '~> 1.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -70,7 +73,8 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl_rails'
-  gem 'guard-rspec', require: false
+  gem 'guard-rspec'
+  gem 'rspec-given'
   gem 'shoulda-matchers', '~> 3.1'
 end
 

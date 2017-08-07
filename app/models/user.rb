@@ -11,9 +11,9 @@ class User < ApplicationRecord
   validate :valid_email
   before_create :valid_email
 
-  has_many :posts, dependent: :destroy
+  has_many :posts, through: :likes
   has_many :comments
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :buyings
 
   enum gender: [:not_specified, :male, :female]
