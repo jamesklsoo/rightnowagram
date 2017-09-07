@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       # Save the user id inside the browser cookie. This is how we keep the user
       # logged in when they navigate around our website.
-      session[:user] = @user.id
+      session[:user_id] = @user.id
       flash[:success] = "Signed in!"
       redirect_to user_posts_path(user_id: @user.id)
     else
@@ -38,6 +38,6 @@ class SessionsController < ApplicationController
       flash[:info] = "User created - confirm or edit details..."
     end
     session[:user] = user.id
-    redirect_to root_path
+    redirect_to posts_path
   end
 end

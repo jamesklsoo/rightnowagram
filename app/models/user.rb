@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates_presence_of :fullname
   validates_presence_of :email
   validates :password, presence: true, length: { in: 6..20 }
-  validate :valid_email
+  validates :valid_email, presence: true
   before_create :valid_email
 
   has_many :posts
